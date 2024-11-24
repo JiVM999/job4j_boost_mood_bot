@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class AchievementService {
 
-
     @PostConstruct
     public void init() {
         System.out.println("Bean AchievementService is going through init.");
