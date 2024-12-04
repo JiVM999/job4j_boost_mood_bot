@@ -20,17 +20,17 @@ public class TgRemoteService extends TelegramLongPollingBot {
 
     private final String botName;
     private final String botToken;
-    private Map<String, String> MoodResp = new HashMap<>();
+    private Map<String, String> moodResp = new HashMap<>();
 
     public TgRemoteService(@Value("${telegram.bot.name}") String botName,
                            @Value("${telegram.bot.token}") String botToken) {
         this.botName = botName;
         this.botToken = botToken;
-        MoodResp.put("lost_sock", "Носки — это коварные создания. Но не волнуйся, второй обязательно найдётся!");
-        MoodResp.put("cucumber", "Огурец тоже дело серьёзное! Главное, не мариноваться слишком долго.");
-        MoodResp.put("dance_ready", "Супер! Танцуй, как будто никто не смотрит. Или, наоборот, как будто все смотрят!");
-        MoodResp.put("need_coffee", "Кофе уже в пути! Осталось только подождать... И ещё немного подождать...");
-        MoodResp.put("sleepy", "Пора на боковую! Даже супергерои отдыхают, ты не исключение.");
+        moodResp.put("lost_sock", "Носки — это коварные создания. Но не волнуйся, второй обязательно найдётся!");
+        moodResp.put("cucumber", "Огурец тоже дело серьёзное! Главное, не мариноваться слишком долго.");
+        moodResp.put("dance_ready", "Супер! Танцуй, как будто никто не смотрит. Или, наоборот, как будто все смотрят!");
+        moodResp.put("need_coffee", "Кофе уже в пути! Осталось только подождать... И ещё немного подождать...");
+        moodResp.put("sleepy", "Пора на боковую! Даже супергерои отдыхают, ты не исключение.");
     }
 
     @Override
@@ -83,7 +83,7 @@ public class TgRemoteService extends TelegramLongPollingBot {
         if (update.hasCallbackQuery()) {
             var data = update.getCallbackQuery().getData();
             var chatId = update.getCallbackQuery().getMessage().getChatId();
-            send(new SendMessage(String.valueOf(chatId), MoodResp.get(data)));
+            send(new SendMessage(String.valueOf(chatId), moodResp.get(data)));
         }
         if (update.hasMessage() && update.getMessage().hasText()) {
             long chatId = update.getMessage().getChatId();
