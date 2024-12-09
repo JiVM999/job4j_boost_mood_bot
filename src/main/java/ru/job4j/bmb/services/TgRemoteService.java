@@ -85,10 +85,16 @@ public class TgRemoteService extends TelegramLongPollingBot {
 
     @Override
     public void onUpdateReceived(Update update) {
+        if (update.hasCallbackQuery()) {
+            var data = update.getCallbackQuery().getData();
+            var chatId = update.getCallbackQuery().getMessage().getChatId();
+            send(new SendMessage(String.valueOf(chatId), moodResp.get(data)));
+        }
         if (update.hasMessage() && update.getMessage().hasText()) {
+            long chatId = update.getMessage().getChatId();
+            send(sendButtons(chatId));
             var message = update.getMessage();
             if ("/start".equals(message.getText())) {
-                long chatId = message.getChatId();
                 var user = new User();
                 user.setClientId(message.getFrom().getId());
                 user.setChatId(chatId);
