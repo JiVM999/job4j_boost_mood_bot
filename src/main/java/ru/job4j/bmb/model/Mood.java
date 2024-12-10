@@ -15,6 +15,11 @@ public class Mood {
 
     private boolean good;
 
+    public Mood(String text, boolean good) {
+        this.text = text;
+        this.good = good;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
