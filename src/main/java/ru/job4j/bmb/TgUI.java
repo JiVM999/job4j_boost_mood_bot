@@ -20,7 +20,6 @@ public class TgUI {
         var inlineKeyboardMarkup = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
         for (var mood : moodRepository.findAll()) {
-            System.out.println(mood);
             keyboard.add(List.of(createBtn(mood.getText(), mood.getId())));
         }
         inlineKeyboardMarkup.setKeyboard(keyboard);
