@@ -30,7 +30,7 @@ public class Achievement {
             return false;
         }
         Achievement that = (Achievement) o;
-        return createAt == that.createAt && Objects.equals(id, that.id) && Objects.equals(user, that.user) && Objects.equals(award, that.award);
+        return Objects.equals(id, that.id);
     }
 
     @Override

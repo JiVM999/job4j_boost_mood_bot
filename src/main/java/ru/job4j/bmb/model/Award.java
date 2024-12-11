@@ -32,7 +32,7 @@ public class Award {
             return false;
         }
         Award award = (Award) o;
-        return days == award.days && Objects.equals(id, award.id) && Objects.equals(title, award.title) && Objects.equals(description, award.description);
+        return Objects.equals(id, award.id);
     }
 
     @Override
