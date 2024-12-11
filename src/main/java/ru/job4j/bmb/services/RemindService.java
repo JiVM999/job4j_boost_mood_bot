@@ -21,7 +21,9 @@ public class RemindService {
             var message = new SendMessage();
             message.setChatId(user.getChatId());
             message.setText("Ping");
-            //tgRemoteService.sent();
+            /*
+                        tgRemoteService.sent();
+             */
         }
     }
 }
