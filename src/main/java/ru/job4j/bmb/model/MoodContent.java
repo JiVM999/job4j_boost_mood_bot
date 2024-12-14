@@ -36,7 +36,7 @@ public class MoodContent {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, mood, text);
+        return Objects.hash(id);
     }
 
     public Long getId() {

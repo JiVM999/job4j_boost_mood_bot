@@ -37,7 +37,7 @@ public class Award {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, description, days);
+        return Objects.hash(id);
     }
 
     public Long getId() {

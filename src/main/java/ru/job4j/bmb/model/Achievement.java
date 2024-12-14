@@ -35,7 +35,7 @@ public class Achievement {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, createAt, user, award);
+        return Objects.hash(id);
     }
 
     public Long getId() {

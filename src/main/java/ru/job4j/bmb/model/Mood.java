@@ -38,7 +38,7 @@ public class Mood {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, text, good);
+        return Objects.hash(id);
     }
 
     public Long getId() {
