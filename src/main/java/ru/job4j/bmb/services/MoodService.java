@@ -9,6 +9,7 @@ import ru.job4j.bmb.repository.MoodLogRepository;
 import ru.job4j.bmb.repository.UserRepository;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -40,13 +41,17 @@ public class MoodService {
 
     public Optional<Content> weekMoodLogCommand(long chatId, Long clientId) {
         var content = new Content(chatId);
-        content.setText(formatMoodLogs(moodLogRepository.findAll(), "Статистика за неделю"));
+        LocalDate month = LocalDate.now().minusDays(30);
+        content.setText(formatMoodLogs(moodLogRepository.findMoodLogsForMonth(clientId,
+                month.atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli()), "Статистика за неделю"));
         return Optional.of(content);
     }
 
     public Optional<Content> monthMoodLogCommand(long chatId, Long clientId) {
         var content = new Content(chatId);
-        content.setText(formatMoodLogs(moodLogRepository.findAll(), "Статистика за месяц"));
+        LocalDate week = LocalDate.now().minusDays(7);
+        content.setText(formatMoodLogs(moodLogRepository.findMoodLogsForWeek(clientId,
+                week.atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli()), "Статистика за месяц"));
         return Optional.of(content);
     }
 

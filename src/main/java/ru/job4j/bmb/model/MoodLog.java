@@ -2,6 +2,7 @@ package ru.job4j.bmb.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
@@ -18,6 +19,8 @@ public class MoodLog {
     @ManyToOne
     @JoinColumn(name = "mood_id")
     private Mood mood;
+
+    private LocalDate voteDate;
 
     private long createdAt;
 
