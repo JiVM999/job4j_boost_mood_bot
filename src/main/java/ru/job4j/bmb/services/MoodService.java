@@ -1,4 +1,4 @@
-package ru.job4j.bmb;
+package ru.job4j.bmb.services;
 
 import org.springframework.stereotype.Service;
 import ru.job4j.bmb.content.Content;
@@ -7,7 +7,6 @@ import ru.job4j.bmb.model.User;
 import ru.job4j.bmb.repository.AchievementRepository;
 import ru.job4j.bmb.repository.MoodLogRepository;
 import ru.job4j.bmb.repository.UserRepository;
-import ru.job4j.bmb.services.RecommendationEngine;
 
 import java.time.Instant;
 import java.time.ZoneId;
@@ -41,11 +40,13 @@ public class MoodService {
 
     public Optional<Content> weekMoodLogCommand(long chatId, Long clientId) {
         var content = new Content(chatId);
+        content.setText(formatMoodLogs(moodLogRepository.findAll(), "Статистика за неделю"));
         return Optional.of(content);
     }
 
     public Optional<Content> monthMoodLogCommand(long chatId, Long clientId) {
         var content = new Content(chatId);
+        content.setText(formatMoodLogs(moodLogRepository.findAll(), "Статистика за месяц"));
         return Optional.of(content);
     }
 
@@ -63,6 +64,7 @@ public class MoodService {
 
     public Optional<Content> awards(long chatId, Long clientId) {
         var content = new Content(chatId);
+
         return Optional.of(content);
     }
 }

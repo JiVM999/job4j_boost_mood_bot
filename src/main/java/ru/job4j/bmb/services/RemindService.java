@@ -3,6 +3,7 @@ package ru.job4j.bmb.services;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import ru.job4j.bmb.content.Content;
 import ru.job4j.bmb.repository.UserRepository;
 
 @Service
@@ -22,7 +23,10 @@ public class RemindService {
             message.setChatId(user.getChatId());
             message.setText("Ping");
             /*
-                        tgRemoteService.sent();
+            Content content = new Content(user.getChatId());
+            content.setText("ping");
+            tgRemoteService.sent(content);
+
              */
         }
     }

@@ -3,7 +3,6 @@ package ru.job4j.bmb.services;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 import org.telegram.telegrambots.meta.api.objects.Message;
-import ru.job4j.bmb.MoodService;
 import ru.job4j.bmb.TgUI;
 import ru.job4j.bmb.content.Content;
 import ru.job4j.bmb.model.User;
@@ -40,11 +39,8 @@ public class BotCommandHandler {
 
     Optional<Content> handleCallback(CallbackQuery callback) {
         var moodId = Long.valueOf(callback.getData());
-        var user = userRepository.findById(callback.getFrom().getId()).get();
-        /*
-        return user.map(value -> moodService.chooseMood(user, moodId));
-         */
-        return Optional.empty();
+        var user = userRepository.findById(callback.getFrom().getId());
+        return user.stream().map(value -> moodService.chooseMood(value, moodId)).findFirst();
     }
 
     private Optional<Content> handleStartCommand(long chatId, Long clientId) {
