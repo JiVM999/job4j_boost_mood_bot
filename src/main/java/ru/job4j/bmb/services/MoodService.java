@@ -2,6 +2,8 @@ package ru.job4j.bmb.services;
 
 import org.springframework.stereotype.Service;
 import ru.job4j.bmb.content.Content;
+import ru.job4j.bmb.model.Achievement;
+import ru.job4j.bmb.model.Award;
 import ru.job4j.bmb.model.MoodLog;
 import ru.job4j.bmb.model.User;
 import ru.job4j.bmb.repository.AchievementRepository;
@@ -67,9 +69,29 @@ public class MoodService {
         return sb.toString();
     }
 
+    private String formatAwards(List<Award> awards, String title) {
+        if (awards.isEmpty()) {
+            return title + ":\nNo awards found.";
+        }
+        var sb = new StringBuilder(title + ":\n");
+        awards.forEach(award -> {
+            sb.append("Дней для получения: ").append(award.getDays()).append("\n")
+                    .append("Заголовок: ").append(award.getTitle()).append("\n")
+                    .append("Описание: ").append(award.getDescription()).append("\n");
+        });
+        return sb.toString();
+    }
+
     public Optional<Content> awards(long chatId, Long clientId) {
         var content = new Content(chatId);
-
+        var user = userRepository.findByClientId(clientId);
+        List<Award> achievementAwards = achievementRepository.findAll().stream()
+                .filter(value -> value.getUser().equals(user)
+                        && (value.getCreateAt() <= Instant.now().getEpochSecond()
+                        && (value.getCreateAt() >= Instant.now().getEpochSecond() - 30 * 24 * 60 * 60)))
+                .map(Achievement::getAward)
+                .toList();
+        content.setText(formatAwards(achievementAwards, "Полученные награды за месяц"));
         return Optional.of(content);
     }
 }
