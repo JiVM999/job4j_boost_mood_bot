@@ -21,6 +21,12 @@ public class Achievement {
     @JoinColumn(name = "award_id")
     private Award award;
 
+    public Achievement(Award award, User user, long createAt) {
+        this.award = award;
+        this.user = user;
+        this.createAt = createAt;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

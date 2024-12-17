@@ -13,7 +13,6 @@ import ru.job4j.bmb.repositories.MoodLogFakeRepository;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
