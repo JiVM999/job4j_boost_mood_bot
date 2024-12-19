@@ -44,6 +44,15 @@ public class Award {
         return Objects.hash(id);
     }
 
+    @Override
+    public String toString() {
+        return "Award{"
+                + "id=" + id
+                + ", title='" + title + '\''
+                + ", description='" + description + '\''
+                + ", days=" + days + '}';
+    }
+
     public Long getId() {
         return id;
     }

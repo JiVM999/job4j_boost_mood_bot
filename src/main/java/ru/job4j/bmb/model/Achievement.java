@@ -27,6 +27,10 @@ public class Achievement {
         this.createAt = createAt;
     }
 
+    public Achievement() {
+
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -42,6 +46,15 @@ public class Achievement {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Achievement{"
+                + "id=" + id
+                + ", createAt=" + createAt
+                + ", user=" + user
+                + ", award=" + award + '}';
     }
 
     public Long getId() {

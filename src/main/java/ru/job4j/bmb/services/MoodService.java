@@ -91,8 +91,9 @@ public class MoodService {
     public Optional<Content> awards(long chatId, Long clientId) {
         var content = new Content(chatId);
         var user = userRepository.findByClientId(clientId);
+        var iter = user.iterator();
         List<Award> achievementAwards = achievementRepository.findAll().stream()
-                .filter(value -> value.getUser().equals(user)
+                .filter(value -> value.getUser().equals(iter.next())
                         && (value.getCreateAt() <= Instant.now().getEpochSecond()
                         && (value.getCreateAt() >= Instant.now().getEpochSecond() - 30 * 24 * 60 * 60)))
                 .map(Achievement::getAward)
